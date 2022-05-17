@@ -1,8 +1,11 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class WebTests {
 
@@ -58,6 +61,25 @@ public class WebTests {
         driver.manage().window().maximize();
 
         Assert.assertEquals(driver.findElement(By.xpath("//li/a[contains(text(), '0-9')]")).getText(), "0-9");
+
+        driver.close();
+    }
+
+    @Test
+    public void testCheckNames() {
+        System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get(URL);
+        driver.manage().window().maximize();
+
+        driver.findElement(By.xpath("//a[contains(text(), 'Team')]")).click();
+        List<WebElement> names = driver.findElements(By.xpath("//h3"));
+
+        String[] expectedNames = {"Oliver Schade", "Gregor Scheithauer", "Stefan Scheler"};
+        for (int i = 0; i < names.size(); i++) {
+            Assert.assertEquals(names.get(i).getText(), expectedNames[i]);
+        }
 
         driver.close();
     }
