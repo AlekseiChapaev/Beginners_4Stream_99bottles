@@ -34,4 +34,19 @@ public class WebTests {
         driver.close();
     }
 
+    @Test
+    public void testCheckMenuSubMenuSubmitNewLanguage(){
+        System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get(URL);
+        driver.manage().window().maximize();
+
+        driver.findElement(By.xpath("//li/a[contains(text(), 'Submit new Language')]")).click();
+
+        Assert.assertEquals(driver.findElement(By.xpath("//a[contains(text(), 'Submit New Language')]")).getText().toLowerCase(), "submit new language");
+
+        driver.close();
+    }
+
 }
