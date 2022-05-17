@@ -49,4 +49,16 @@ public class WebTests {
         driver.close();
     }
 
+    @Test
+    public void testCheckSubMenu() {
+        System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("http://www.99-bottles-of-beer.net/abc.html");
+        driver.manage().window().maximize();
+
+        Assert.assertEquals(driver.findElement(By.xpath("//li/a[contains(text(), '0-9')]")).getText(), "0-9");
+
+        driver.close();
+    }
 }
