@@ -98,4 +98,19 @@ public class WebTests {
 
         driver.close();
     }
+
+    @Test
+    public void testCheckRequiredFields() {
+        System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("http://www.99-bottles-of-beer.net/submitnewlanguage.html");
+        driver.manage().window().maximize();
+
+        driver.findElement(By.xpath("//input[@name = 'submitlanguage']")).click();
+
+        Assert.assertEquals(driver.findElement(By.xpath("//div[@id = 'main']/p")).getText(), "Error: Precondition failed - Incomplete Input.");
+
+        driver.close();
+    }
 }
