@@ -12,20 +12,20 @@ public class WebTests {
     private final static String URL = "http://www.99-bottles-of-beer.net/";
 
     @Test
-    public void testCheckHeader(){
-       System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
-       WebDriver driver = new ChromeDriver();
+    public void testCheckHeader() {
+        System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
 
-       driver.get(URL);
-       driver.manage().window().maximize();
+        driver.get(URL);
+        driver.manage().window().maximize();
 
-       Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(), "99 Bottles of Beer");
+        Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(), "99 Bottles of Beer");
 
-       driver.close();
+        driver.close();
     }
 
     @Test
-    public void testCheckMenuSubmitNewLanguage(){
+    public void testCheckMenuSubmitNewLanguage() {
         System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
 
@@ -38,7 +38,7 @@ public class WebTests {
     }
 
     @Test
-    public void testCheckMenuSubMenuSubmitNewLanguage(){
+    public void testCheckMenuSubMenuSubmitNewLanguage() {
         System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
 
@@ -80,6 +80,21 @@ public class WebTests {
         for (int i = 0; i < names.size(); i++) {
             Assert.assertEquals(names.get(i).getText(), expectedNames[i]);
         }
+
+        driver.close();
+    }
+
+    @Test
+    public void testCheckCountMenuButtons() {
+        System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get(URL);
+        driver.manage().window().maximize();
+
+        List<WebElement> menu = driver.findElements(By.xpath("//ul[@id = 'menu']/li"));
+
+        Assert.assertEquals(menu.size(), 6);
 
         driver.close();
     }
