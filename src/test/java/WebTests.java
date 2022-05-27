@@ -137,4 +137,23 @@ public class WebTests {
 
         driver.close();
     }
+
+    @Test
+    public void testCheckImportantText() {
+        System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("http://www.99-bottles-of-beer.net/submitnewlanguage.html");
+        driver.manage().window().maximize();
+
+        String notice = "IMPORTANT: Take your time! The more carefully you fill out this form" +
+                " (especially the language name and description), the easier it will be for us" +
+                " and the faster your language will show up on this page. We don't have the time" +
+                " to mess around with fixing your descriptions etc. Thanks for your understanding.";
+        String actualText = driver.findElement(By.xpath("//div[@id = 'main']/ul/li[1]")).getText();
+
+        Assert.assertEquals(actualText, notice);
+
+        driver.close();
+    }
 }
