@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class WebTests {
@@ -110,6 +111,29 @@ public class WebTests {
         driver.findElement(By.xpath("//input[@name = 'submitlanguage']")).click();
 
         Assert.assertEquals(driver.findElement(By.xpath("//div[@id = 'main']/p")).getText(), "Error: Precondition failed - Incomplete Input.");
+
+        driver.close();
+    }
+
+    @Test
+    public void testCheckErrorMessage() {
+        System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("http://www.99-bottles-of-beer.net/submitnewlanguage.html");
+        driver.manage().window().maximize();
+
+        driver.findElement(By.xpath("//input[@name = 'submitlanguage']")).click();
+        String errorMessage = driver.findElement(By.xpath("//div[@id = 'main']/p")).getText();
+        String errorMessage1 = errorMessage.replaceAll("[^ a-zA-z]", "");
+        String errorMessage2 = errorMessage.replaceAll("[ \\w]", "");
+
+        Assert.assertTrue(errorMessage1.contains("Error"));
+        Assert.assertTrue(errorMessage1.contains("Precondition"));
+        Assert.assertTrue(errorMessage1.contains("failed"));
+        Assert.assertTrue(errorMessage1.contains("Incomplete"));
+        Assert.assertTrue(errorMessage1.contains("Input"));
+        Assert.assertTrue(errorMessage2.contains(":-."));
 
         driver.close();
     }
