@@ -5,12 +5,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class WebTests {
 
     private final static String URL = "http://www.99-bottles-of-beer.net/";
+    private final static String URL_SUBMIT_NEW_LANGUAGE = "http://www.99-bottles-of-beer.net/submitnewlanguage.html";
 
     @Test
     public void testCheckHeader() {
@@ -105,7 +105,7 @@ public class WebTests {
         System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
 
-        driver.get("http://www.99-bottles-of-beer.net/submitnewlanguage.html");
+        driver.get(URL_SUBMIT_NEW_LANGUAGE);
         driver.manage().window().maximize();
 
         driver.findElement(By.xpath("//input[@name = 'submitlanguage']")).click();
@@ -120,7 +120,7 @@ public class WebTests {
         System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
 
-        driver.get("http://www.99-bottles-of-beer.net/submitnewlanguage.html");
+        driver.get(URL_SUBMIT_NEW_LANGUAGE);
         driver.manage().window().maximize();
 
         driver.findElement(By.xpath("//input[@name = 'submitlanguage']")).click();
@@ -143,7 +143,7 @@ public class WebTests {
         System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
 
-        driver.get("http://www.99-bottles-of-beer.net/submitnewlanguage.html");
+        driver.get(URL_SUBMIT_NEW_LANGUAGE);
         driver.manage().window().maximize();
 
         String notice = "IMPORTANT: Take your time! The more carefully you fill out this form" +
@@ -156,4 +156,21 @@ public class WebTests {
 
         driver.close();
     }
+
+    @Test
+    public void testCheckMenuBrowseLanguages() {
+        System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get(URL);
+        driver.manage().window().maximize();
+        driver.findElement(By.xpath("//a[@href='/abc.html']")).click();
+
+        Assert.assertEquals(driver.findElement(By.xpath("//tr/th[1]")).getText(), "Language");
+        Assert.assertEquals(driver.findElement(By.xpath("//tr/th[2]")).getText(), "Author");
+
+        driver.close();
+    }
+
+
 }
