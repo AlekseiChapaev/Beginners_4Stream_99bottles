@@ -172,5 +172,35 @@ public class WebTests {
         driver.close();
     }
 
+    @Test
+    public void testCheckNewComments() {
+        System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
 
+        driver.get(URL);
+        driver.manage().window().maximize();
+
+        driver.findElement(By.xpath("//a[@href='/toplist.html']")).click();
+        driver.findElement(By.xpath("//a[contains(text(), 'New Comments')]")).click();
+
+        Assert.assertEquals(driver.findElement(By.xpath("//div[@id='main']/h2")).getText(), "{LIST}".trim());
+
+        driver.close();
+    }
+
+    @Test
+    public void testCheckCorrectColorsOfNotice() {
+        System.setProperty("webdriver.chrome.driver", "C:/QA/4_stream/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get(URL_SUBMIT_NEW_LANGUAGE);
+        driver.manage().window().maximize();
+
+        WebElement noticeImportant = driver.findElement(By.xpath("//div[@id = 'main']/ul/li/span"));
+
+        Assert.assertEquals(noticeImportant.getText(), "IMPORTANT:");
+        Assert.assertEquals(noticeImportant.getAttribute("style"), "background-color: red; color: white;");
+
+        driver.close();
+    }
 }
